@@ -11,13 +11,39 @@ public class MarkdownParse {
         // the next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
-            System.out.println(currentIndex);
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
-            int openParen = markdown.indexOf("(", nextCloseBracket);
-            int closeParen = markdown.indexOf(")", openParen);
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
+
+            if((nextOpenBracket == -1) || (nextCloseBracket == -1)) {
+                break;
+            }
+
+            if(nextOpenBracket > 0) {
+                System.out.println(markdown.charAt(nextOpenBracket));
+                if(markdown.charAt(nextOpenBracket - 1) == '!') {
+                    currentIndex = nextOpenBracket + 1;
+                    System.out.println("Exclamation mark detected");
+                    continue;
+                }
+            }
+
+            int markdownCheck = nextCloseBracket + 1;
+            if(markdown.charAt(markdownCheck) == ('(')) {
+
+                int openParen = markdown.indexOf("(", nextCloseBracket);
+                int closeParen = markdown.indexOf(")", openParen);
+
+                if((openParen == -1) || (closeParen == -1)) {
+                    break;
+                }
+
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                currentIndex = closeParen + 1;
+            }
+            else {
+                currentIndex = markdownCheck;
+            }
+
         }
         return toReturn;
     }
