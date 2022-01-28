@@ -23,6 +23,14 @@ public class MarkdownParse {
             if(markdownCheck>=markdown.length()){
                 break;
             }
+
+            if(nextOpenBracket > 0) {
+                 if(markdown.charAt(nextOpenBracket - 1) == '!') {
+                     currentIndex = nextOpenBracket + 1;
+                     continue;
+                 }
+             }
+
             if(markdown.charAt(markdownCheck) == ('(')) {
 
                 int openParen = markdown.indexOf("(", nextCloseBracket);
