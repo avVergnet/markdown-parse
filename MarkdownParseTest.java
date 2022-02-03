@@ -33,6 +33,10 @@ public class MarkdownParseTest{
 
         assertEquals(expectedOutput, links);
     }
+    @Test
+    public void testFailure(){
+        assertEquals(1, 1+1);
+    }
 
     @Test
     public void testGetLinksThree() throws IOException{
