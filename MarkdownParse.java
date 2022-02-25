@@ -25,12 +25,12 @@ public class MarkdownParse {
             }
 
             if(nextOpenBracket > 0) {
-                 if(markdown.charAt(nextOpenBracket - 1) == '!') {
-                     currentIndex = nextOpenBracket + 1;
-                     continue;
-                 }
-             }
-
+                if(markdown.charAt(nextOpenBracket - 1) == '!') {
+                    currentIndex = nextOpenBracket + 1;
+                    continue;
+                }
+            }
+            
             if(markdown.charAt(markdownCheck) == ('(')) {
 
                 int openParen = markdown.indexOf("(", nextCloseBracket);
@@ -50,6 +50,9 @@ public class MarkdownParse {
         }
         return toReturn;
     }
+
+
+    
     public static void main(String[] args) throws IOException {
 		Path fileName = Path.of(args[0]);
 	    String contents = Files.readString(fileName);
